@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Custom Mapper</title>
+</head>
+
+<style type="text/css">
+
+body{
+	background-color: LightGrey;
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.container{
+	width: 800px;
+	margin: 50px auto;
+}
+
+#map{
+	width:100%;
+	height:600px;
+
+	background-color: #fff;
+	border:1px solid #ccc;
+}
+
+.htmlMarker{
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	color:#fff;
+	text-align: center;
+	line-height: 18px;
+	font-size: 12px;
+	margin-left:-1px;
+}
+
+.infoBox{
+	border: 1px solid #ccc;
+	font-size:14px;
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	background-color: #fff;
+	color: #000;
+	box-sizing:border-box;
+	box-shadow: 5px 5px 15px #666;
+	-moz-box-shadow: 5px 5px 15px #666;
+	-webkit-box-shadow: 5px 5px 15px #666;
+}
+
+</style>
+
+<body>
+<div class="container">
+	<h1>Custom Mapper</h1>
+	<div id="map"></div>
+</div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+	<script type="text/javascript" src="infobox.js"></script>
+	<script type="text/javascript" src="marker.js"></script>
+	<script type="text/javascript" src="CustomMapper.js"></script>
+
+	<script type="text/javascript">
+
+
+	var loc1 = {
+		id : 1,
+		title: "Test Location",
+		lat: 40.743388,
+		lng: -74.0068264,
+		cat_id: 1,
+		overlay_html:"<div>1</div>",
+		overlay_width: 20,
+		overlay_height: 20,
+		open:false,
+		infobox_html:"<div>Hello Mapper</div>",
+	};
+
+	var loc2 = {
+		id : 2,
+		title: "Test Location",
+		lat: 40.7392333,
+		lng: -74.00665,
+		cat_id: 1,
+		overlay_html:"<div>2</div>",
+		overlay_width: 20,
+		overlay_height: 20,
+		open:false,
+		infobox_html:"<div>Hello Mapper</div>",
+	};
+
+	var loc3 = {
+		id : 3,
+		title: "Test Location",
+		lat: 40.73635,
+		lng: -74.0099333,
+		cat_id: 1,
+		overlay_html:"<div>3</div>",
+		overlay_width: 20,
+		overlay_height: 20,
+		open:false,
+		infobox_html:"<div>Hello Mapper</div>",
+	};
+
+	var loc4 = {
+		id : 4,
+		title: "Test Location",
+		lat: 40.7380667,
+		lng: -74.0055667,
+		cat_id: 1,
+		overlay_html:"<div>4</div>",
+		overlay_width: 20,
+		overlay_height: 20,
+		open:false,
+		infobox_html:"<div>Hello Mapper</div>",
+	};
+
+	var mapperOptions = {
+		lat: 40.7392333,
+		lng: -74.00835,
+		mapOptions: {
+			zoom: 16,
+			scrollwheel: true,
+			disableDoubleClickZoom: true,
+			scaleControl: false,
+			disableDefaultUI: true,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			styles: [
+				{
+				  featureType: "all",
+				  elementType: "all",
+				  stylers: [
+					{ saturation: -100 } // <-- THIS
+				  ]
+				}
+			]
+		},
+		locations : [loc1, loc2, loc3, loc4],
+		categories: [{
+				id: 1,
+				title:"Test",
+				markerImage:{
+					url:"dot2.png",
+					width: 20,
+					height:20
+				},
+				selectImage:{
+					url:"dot.png",
+					width: 30,
+					height:30
+				},
+				hoverImage:{
+					url: "dot3.png",
+					width: 20,
+					height:20
+				}
+			}],
+		overlay_options:{
+			//TODO
+		},
+		infobox_offset_x : -55,
+		infobox_offset_y : -75,
+		infobox_options:{
+			disableAutoPan: false,
+			maxWidth: "110px",
+			pixelOffset: new google.maps.Size(-55, -75),
+			infoBoxClearance: new google.maps.Size(1, 1),
+			zIndex: null,
+			closeBoxURL: "",
+			boxStyle: {
+				opacity: 1,
+				width: "110px",
+				height: "50px",
+				padding: "10px"
+			},
+			isHidden: false,
+			pane: "floatPane",
+			enableEventPropagation: false
+		}
+	};
+
+	CustomMapper.init("map", mapperOptions);
+
+	</script>
+
+</body>
+</html>
